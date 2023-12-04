@@ -4,6 +4,7 @@ import io.Mumuapi.entity.vo.RoleType;
 import io.Mumuapi.entity.vo.Timestamps;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -19,14 +20,14 @@ public class Member {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(length = 50)
+    @Column(unique=true, length = 50)
     private String userId;
 
     @Column(length = 255)
     private String userPw;
 
     @Column(length = 50)
-    private String name;
+    private String userName;
 
     @Column(length = 50)
     @Enumerated(EnumType.STRING)
@@ -35,17 +36,18 @@ public class Member {
     @Embedded
     private Timestamps timestamps;
 
-    public Member(String userId, String userPw, String name, RoleType roleType) {
+    @Builder
+    public Member(String userId, String userPw, String userName, RoleType roleType) {
         this.userId = userId;
         this.userPw = userPw;
-        this.name = name;
+        this.userName = userName;
         this.roleType = roleType;
     }
 
     // 비즈니스 로직
 
-    public static Member createAdminMember(String userId, String userPw, String name) {
+    public static Member createAdminMember(String userId, String userPw, String userName) {
 
-        return new Member(userId, userPw, name, RoleType.ADMIN);
+        return new Member(userId, userPw, userName, RoleType.ADMIN);
     }
 }
