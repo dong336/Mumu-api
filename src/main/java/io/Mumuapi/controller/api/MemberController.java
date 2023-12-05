@@ -33,14 +33,14 @@ public class MemberController {
         return Map.of("code", 2000);
     }
 
-    @GetMapping("/v1/isLoginAdmin")
+    @GetMapping("/v1/admin/isLoginAdmin")
     public ResponseWrapper<Map<String, Object>> isLoginAdmin() {
         log.info("start isLoginAdmin");
         return new ResponseWrapper<>(ResponseCode.SUCCESS);
     }
 
-    @PostMapping("/v1/loginAdmin")
-    public ResponseWrapper<AdminMemberDto> loginAdmin(@RequestBody AdminMemberDto adminMemberDto) {
+    @PostMapping("/v1/admin/login")
+    public ResponseWrapper<AdminMemberDto> adminLogin(@RequestBody AdminMemberDto adminMemberDto) {
         log.info("start loginAdmin: {}", adminMemberDto);
         Member admin = memberRepository.findByUserId(adminMemberDto.getId());
 

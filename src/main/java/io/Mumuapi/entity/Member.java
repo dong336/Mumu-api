@@ -12,7 +12,8 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "member", indexes = {
         @Index(name="IDX_MEMBER_1", columnList = "userId"),
-        @Index(name="IDX_MEMBER_2", columnList = "roleType")
+        @Index(name="IDX_MEMBER_2", columnList = "roleType"),
+        @Index(name="IDX_MEMBER_3", columnList = "userId, roleType")
 })
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
@@ -20,16 +21,16 @@ public class Member {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(unique=true, length = 50)
+    @Column(nullable = false, length = 50)
     private String userId;
 
-    @Column(length = 255)
+    @Column(nullable = false, length = 255)
     private String userPw;
 
     @Column(length = 50)
     private String userName;
 
-    @Column(length = 50)
+    @Column(nullable = false, length = 50)
     @Enumerated(EnumType.STRING)
     private RoleType roleType;
 
