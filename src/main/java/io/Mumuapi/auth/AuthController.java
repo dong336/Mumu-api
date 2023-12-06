@@ -1,7 +1,7 @@
 package io.Mumuapi.auth;
 
-import io.Mumuapi.dto.common.ResCode;
-import io.Mumuapi.dto.common.ResWrapper;
+import io.Mumuapi.controller.api.admin.dto.common.ResCode;
+import io.Mumuapi.controller.api.admin.dto.common.ResWrapper;
 import io.Mumuapi.entity.vo.RoleType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
@@ -20,21 +20,24 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/auth/admin-login")
-    public ResponseEntity<?> authAdminLogin(@RequestBody AuthRequest request) throws Exception {
+    public ResponseEntity<ResWrapper<AuthResponse>> authAdminLogin(@RequestBody AuthRequest request) throws Exception {
         String username = request.username();
         String password = request.password();
 
-        ResCode code = authService.authAdminLogin(username, password);
+        var result = authService.authAdminLogin(username, password);
 
-        if(code.equals(ResCode.SUCCESS)) {
+        if(result.getCode() == ResCode.SUCCESS.getCode()) {
             String jws = jwtUtil.generateJws(username, RoleType.ADMIN.toString());
             HttpHeaders headers = new HttpHeaders();
 
             headers.add("Authorization", jws);
 
-            return ResponseEntity.ok().headers(headers).build();
+            return ResponseEntity.ok()
+                    .headers(headers)
+                    .body(result);
         } else {
-            return ResponseEntity.ok().body(new ResWrapper<>(code));
+            return ResponseEntity.ok()
+                    .body(result);
         }
     }
 

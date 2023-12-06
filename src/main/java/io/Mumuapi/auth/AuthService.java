@@ -1,6 +1,7 @@
 package io.Mumuapi.auth;
 
-import io.Mumuapi.dto.common.ResCode;
+import io.Mumuapi.controller.api.admin.dto.common.ResCode;
+import io.Mumuapi.controller.api.admin.dto.common.ResWrapper;
 import io.Mumuapi.entity.Member;
 import io.Mumuapi.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,16 +13,19 @@ public class AuthService {
 
     private final MemberRepository memberRepository;
 
-    public ResCode authAdminLogin(String userId, String userPw) {
+    public ResWrapper<AuthResponse> authAdminLogin(String userId, String userPw) {
         Member foundMember = memberRepository.findByUserId(userId);
         if(foundMember == null)
-            return ResCode.FAIL_MEMBER_NO_ID;
+            return new ResWrapper<>(ResCode.FAIL_MEMBER_NO_ID);
 
         Member authenticedMember = memberRepository.findByUserIdAndUserPw(userId, userPw);
         if(authenticedMember == null)
-            return ResCode.FAIL_MEMBER_INVALID_PW;
+            return new ResWrapper<>(ResCode.FAIL_MEMBER_INVALID_PW);
 
-        return ResCode.SUCCESS;
+        String id = authenticedMember.getUserId();
+        String name = authenticedMember.getUserName();
+
+        return new ResWrapper<>(ResCode.SUCCESS, new AuthResponse(id, name));
     }
 
     public boolean authUserId(String userId) {

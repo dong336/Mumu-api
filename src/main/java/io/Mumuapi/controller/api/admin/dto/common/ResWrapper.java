@@ -1,4 +1,4 @@
-package io.Mumuapi.dto.common;
+package io.Mumuapi.controller.api.admin.dto.common;
 
 import lombok.*;
 
