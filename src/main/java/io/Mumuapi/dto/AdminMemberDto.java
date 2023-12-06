@@ -1,4 +1,4 @@
-package io.Mumuapi.controller.api.dto;
+package io.Mumuapi.dto;
 
 import lombok.Builder;
 import lombok.Data;

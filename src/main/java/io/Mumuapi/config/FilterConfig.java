@@ -25,7 +25,7 @@ public class FilterConfig {
     public FilterRegistrationBean<AuthRequestFilter> authRequestFilterRegist() {
         FilterRegistrationBean<AuthRequestFilter> registrationBean = new FilterRegistrationBean<>();
         registrationBean.setFilter(authRequestFilter(jwtUtil, authService));
-        registrationBean.addUrlPatterns("*");
+        registrationBean.addUrlPatterns("/api/admin/*");
         return registrationBean;
     }
 }

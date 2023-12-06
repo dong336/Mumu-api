@@ -1,11 +1,11 @@
-package io.Mumuapi.controller.api.dto.common;
+package io.Mumuapi.dto.common;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum ResponseCode {
+public enum ResCode {
 
     SUCCESS(2000, "성공"),
 

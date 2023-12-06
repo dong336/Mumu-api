@@ -1,14 +1,10 @@
 package io.Mumuapi.auth;
 
-import io.Mumuapi.controller.api.dto.common.ResponseCode;
-import io.Mumuapi.controller.api.dto.common.ResponseWrapper;
-import io.Mumuapi.entity.Member;
+import io.Mumuapi.dto.common.ResCode;
+import io.Mumuapi.dto.common.ResWrapper;
 import io.Mumuapi.entity.vo.RoleType;
-import io.Mumuapi.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,9 +24,9 @@ public class AuthController {
         String username = request.username();
         String password = request.password();
 
-        ResponseCode code = authService.authAdminLogin(username, password);
+        ResCode code = authService.authAdminLogin(username, password);
 
-        if(code.equals(ResponseCode.SUCCESS)) {
+        if(code.equals(ResCode.SUCCESS)) {
             String jws = jwtUtil.generateJws(username, RoleType.ADMIN.toString());
             HttpHeaders headers = new HttpHeaders();
 
@@ -38,7 +34,7 @@ public class AuthController {
 
             return ResponseEntity.ok().headers(headers).build();
         } else {
-            return ResponseEntity.ok().body(new ResponseWrapper<>(code));
+            return ResponseEntity.ok().body(new ResWrapper<>(code));
         }
     }
 

@@ -21,9 +21,9 @@ public class AuthRequestFilter extends OncePerRequestFilter {
         System.out.println("start JwtRequestFilter.doFilterInternal");
         String requestURI = request.getRequestURI();
 
-        if(!requestURI.contains("/admin/"))
-            filterChain.doFilter(request, response);
-        else {
+//        if(!requestURI.contains("/admin/"))
+//            filterChain.doFilter(request, response);
+//        else {
             final String token = request.getHeader("Authorization");
 
             if (token != null && jwtUtil.validateToken(token)) {
@@ -39,6 +39,6 @@ public class AuthRequestFilter extends OncePerRequestFilter {
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                 response.getWriter().write("JWT Validation Failed");
             }
-        }
+//        }
     }
 }
