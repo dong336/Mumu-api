@@ -34,8 +34,17 @@ public class InitDB {
                     .userId("admin")
                     .userPw("0000")
                     .build();
-
             em.persist(admin);
+
+            for(int i = 1; i <= 100; i++) {
+                Member m = Member.builder()
+                        .userName("관리자" + i)
+                        .roleType(RoleType.ADMIN)
+                        .userId("admin" + i)
+                        .userPw("0000")
+                        .build();
+                em.persist(m);
+            }
         }
     }
 }

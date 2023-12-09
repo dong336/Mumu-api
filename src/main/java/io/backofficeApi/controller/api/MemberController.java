@@ -1,9 +1,9 @@
-package io.backofficeApi.controller.api.admin;
+package io.backofficeApi.controller.api;
 
-import io.backofficeApi.controller.api.admin.dto.AdminLoginRequestDto;
-import io.backofficeApi.controller.api.admin.dto.AdminLoginResponseDto;
-import io.backofficeApi.controller.api.admin.dto.common.ResCode;
-import io.backofficeApi.controller.api.admin.dto.common.ResWrapper;
+import io.backofficeApi.controller.api.dto.LoginRequestDto;
+import io.backofficeApi.controller.api.dto.LoginResponseDto;
+import io.backofficeApi.controller.api.dto.common.ResCode;
+import io.backofficeApi.controller.api.dto.common.ResWrapper;
 import io.backofficeApi.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +18,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/admin")
 @RequiredArgsConstructor
-public class AdminMemberController {
+public class MemberController {
 
     private final MemberRepository memberRepository;
 
@@ -28,7 +28,7 @@ public class AdminMemberController {
     }
 
     @GetMapping("/v1/login")
-    public ResWrapper<AdminLoginResponseDto> login(@RequestBody AdminLoginRequestDto adminLoginRequestDto) throws Exception {
+    public ResWrapper<LoginResponseDto> login(@RequestBody LoginRequestDto adminLoginRequestDto) throws Exception {
         log.info("start isLogin");
 
 

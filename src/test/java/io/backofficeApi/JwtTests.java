@@ -14,6 +14,11 @@ class JwtTests {
     AuthUtil jwtUtil;
 
 	@Test
+	void testJava() {
+
+	}
+
+	@Test
 	void testJwtUtil() {
 		String token = jwtUtil.generateJws("kdw123", "ADMIN");
 		String username = jwtUtil.getUsernameFromToken(token);

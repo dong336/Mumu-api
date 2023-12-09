@@ -1,7 +1,7 @@
 package io.backofficeApi.auth;
 
-import io.backofficeApi.controller.api.admin.dto.common.ResCode;
-import io.backofficeApi.controller.api.admin.dto.common.ResWrapper;
+import io.backofficeApi.controller.api.dto.common.ResCode;
+import io.backofficeApi.controller.api.dto.common.ResWrapper;
 import io.backofficeApi.entity.vo.RoleType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
@@ -39,10 +39,5 @@ public class AuthController {
             return ResponseEntity.ok()
                     .body(result);
         }
-    }
-
-    @PostMapping("/auth/user-login")
-    public ResponseEntity<?> authUser(@RequestBody AuthRequest request) {
-        return null;
     }
 }

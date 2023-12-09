@@ -1,7 +1,7 @@
 package io.backofficeApi.controller;
 
-import io.backofficeApi.controller.api.admin.dto.common.ResCode;
-import io.backofficeApi.controller.api.admin.dto.common.ResWrapper;
+import io.backofficeApi.controller.api.dto.common.ResCode;
+import io.backofficeApi.controller.api.dto.common.ResWrapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

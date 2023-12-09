@@ -1,4 +1,4 @@
-package io.backofficeApi.controller.api.admin.dto.common;
+package io.backofficeApi.controller.api.dto.common;
 
 import lombok.*;
 

@@ -18,20 +18,29 @@ public class AuthRequestFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-        final String token = request.getHeader("Authorization");
+        try {
+            final String token = request.getHeader("Authorization");
 
-        if (token != null && jwtUtil.validateToken(token)) {
-            String username = jwtUtil.getUsernameFromToken(token);
+            if (token != null) {
+                jwtUtil.validateToken(token); // 토큰 유효성 검사
+                String username = jwtUtil.getUsernameFromToken(token);
 
-            if (authService.authUserId(username)) {
-                filterChain.doFilter(request, response);
+                if (authService.authUserId(username)) {
+                    filterChain.doFilter(request, response);
+                } else {
+                    handleAuthenticationFailure(response, "User is not authorized");
+                }
             } else {
-                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                response.getWriter().write("JWT Validation Failed");
+                handleAuthenticationFailure(response, "JWT token is missing");
             }
-        } else {
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            response.getWriter().write("JWT Validation Failed");
+        } catch (Exception e) {
+            handleAuthenticationFailure(response, "JWT Validation Failed");
         }
+    }
+
+    private void handleAuthenticationFailure(HttpServletResponse response, String errorMessage) throws IOException {
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        response.setContentType("application/json");
+        response.getWriter().write("{\"error\": \"" + errorMessage + "\"}");
     }
 }

@@ -1,7 +1,7 @@
 package io.backofficeApi.auth;
 
-import io.backofficeApi.controller.api.admin.dto.common.ResCode;
-import io.backofficeApi.controller.api.admin.dto.common.ResWrapper;
+import io.backofficeApi.controller.api.dto.common.ResCode;
+import io.backofficeApi.controller.api.dto.common.ResWrapper;
 import io.backofficeApi.entity.Member;
 import io.backofficeApi.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;

@@ -1,11 +1,11 @@
-package io.backofficeApi.controller.api.admin.dto;
+package io.backofficeApi.controller.api.dto;
 
 import lombok.Builder;
 import lombok.Data;
 
 @Data
 @Builder
-public class AdminLoginRequestDto {
+public class LoginRequestDto {
     private String id;
     private String pw;
 }
