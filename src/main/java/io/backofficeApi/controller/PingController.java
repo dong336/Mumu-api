@@ -1,12 +1,12 @@
 package io.backofficeApi.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@RequestMapping("/api")
+@Controller
 @RequiredArgsConstructor
 public class PingController {
 
@@ -14,11 +14,5 @@ public class PingController {
     public String hello() {
 
         return "Hello, World!";
-    }
-
-    @GetMapping("/ping")
-    public String ping() {
-
-        return "Success";
     }
 }
